@@ -3,13 +3,22 @@ var pwaCardContent = pwaCard.querySelector('.card__content');
 var pwaCardDetails = pwaCard.querySelector('.card__details');
 var detailsShown = false;
 
-pwaCard.addEventListener('click', function (event) {
+if ('serviceWorker' in navigator)
+  navigator.serviceWorker.register('/sw.js')
+    .then(function ()
+    {
+      console.log("SW registered")
+    })
+
+pwaCard.addEventListener('click', function (event)
+{
   if (!detailsShown) {
     detailsShown = true;
     pwaCardContent.style.opacity = 0;
     pwaCardDetails.style.display = 'block';
     pwaCardContent.style.display = 'none';
-    setTimeout(function () {
+    setTimeout(function ()
+    {
       pwaCardDetails.style.opacity = 1;
     }, 300);
   } else {
@@ -17,7 +26,8 @@ pwaCard.addEventListener('click', function (event) {
     pwaCardDetails.style.opacity = 0;
     pwaCardContent.style.display = 'block';
     pwaCardDetails.style.display = 'none';
-    setTimeout(function () {
+    setTimeout(function ()
+    {
       pwaCardContent.style.opacity = 1;
     }, 300);
   }
